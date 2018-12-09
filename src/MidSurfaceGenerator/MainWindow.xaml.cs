@@ -3,17 +3,9 @@ using MidSurfaceNameSpace.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MidSurfaceNameSpace.Solver;
 using System.IO;
 using System.Globalization;
@@ -527,7 +519,7 @@ namespace MidSurfaceNameSpace.MidSurfaceGenerator
             {
                 // true is the default, but it is important not to set it to false
                 myProcess.StartInfo.UseShellExecute = true;
-                myProcess.StartInfo.FileName = "https://github.com/sevoster/UNN_ITMM_AI381607m/blob/master/doc/%D0%A0%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE%20%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%B0_v.1.0.docx";
+                myProcess.StartInfo.FileName = "https://github.com/sevoster/middle-surface-proj/blob/master/doc/Guide-MiddleSurfaceProj.pdf";
                 myProcess.Start();
             }
             catch (Exception t)

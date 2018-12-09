@@ -17,23 +17,7 @@
             <MenuItem Header="Настройки" Click="Settings_Click"/>
             <MenuItem Header="Справка">
                 <MenuItem Header="Руководство оператора" Click="OperatorGuide_Click" />
-                <!--  <MenuItem Header="About"/>-->
             </MenuItem>
-             <MenuItem Header="Запустить все тесты" Click ="Go_all_tests"/>
-            <MenuItem Header="Стратегии">
-                <MenuItem Header="Перебор" Click="Do_Enumeration"/>
-                <MenuItem Header="Поток" Click="FlowSlice_Click"/>
-            </MenuItem>
-            <!-- <MenuItem Header="Debug">
-                <MenuItem Header="Show Normal" Click="ShowNormal_Click"/>
-                <MenuItem Header="Show Only Points" Click="ShowOnlyPoints_Click"/>
-                <MenuItem Header="Show Indices" Click="ShowIndices_Click"/>
-                <MenuItem Header="Show Only Model Indices" Click="ShowOnlyModelIndices_Click"/>
-                <MenuItem Header="Show Simplified Model" Click="ShowSimplified_Click"/>
-                <MenuItem Header="Show Detalizer Normals" Click="ShowDetalizerNormals_Click"/>
-                <Separator/>
-                <MenuItem Header="Clear" Click="ClearDebug_Click"/>
-            </MenuItem> -->
         </Menu>
         <ToolBar x:Name="toolBar" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" d:LayoutOverrides="TopPosition, BottomPosition" DockPanel.Dock="Top">
             <Label x:Name="label1" Content="Точность линеаризации" Height="26" VerticalAlignment="Top"/>
