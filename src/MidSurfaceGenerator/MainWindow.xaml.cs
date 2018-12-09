@@ -92,7 +92,7 @@ namespace MidSurfaceNameSpace.MidSurfaceGenerator
                 try
                 {
                     Component.Model model_temp = new Component.Model();
-                    model_temp.Add(new Parser().ImportFile(importDlg.FileName));
+                    model_temp.Add(new FigureParser().ParseFile(importDlg.FileName));
                     filename = importDlg.FileName;
                     //TODO: Dinar: some trick, maybe not good solution
                     model = model_temp;
@@ -242,7 +242,7 @@ namespace MidSurfaceNameSpace.MidSurfaceGenerator
                 foreach (string path in allFoundFiles)
                 {
                     Component.Model model_temp = new Component.Model();
-                    model_temp.Add(new Parser().ImportFile(path));
+                    model_temp.Add(new FigureParser().ParseFile(path));
                     model = model_temp;
                     RedrawModel();
                     mid_surface_model = alg.Run(new SolverData(model));
@@ -557,7 +557,7 @@ namespace MidSurfaceNameSpace.MidSurfaceGenerator
                 try
                 {
                     Component.Model model_temp = new Component.Model();
-                    new Parser().ExportFile(mid_surface_model, importDlg.FileName);
+                    new FigureParser().ExportFile(mid_surface_model, importDlg.FileName);
 
                     //TODO: Dinar: some trick, maybe not good solution
                     model = null;

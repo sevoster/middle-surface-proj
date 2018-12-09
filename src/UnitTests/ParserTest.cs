@@ -12,11 +12,11 @@ namespace MidSurfaceNameSpace.UnitTests
         [TestMethod]
         public void TestImportMethodCorrect()
         {
-            Parser parser = new Parser();
+            FigureParser parser = new FigureParser();
             string pathToTestFile = Environment.CurrentDirectory + @"\test1.xml";
 
             //Try to parse test xml
-            Figure figure = parser.ImportFile(pathToTestFile);
+            IFigure figure = parser.ParseFile(pathToTestFile);
 
             //Check that we got figure
             Assert.AreNotEqual(null, figure);

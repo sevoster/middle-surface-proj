@@ -1,35 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MidSurfaceNameSpace.Primitive;
 using System.Xml.Serialization;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
 using System.Windows;
-using MidSurfaceNameSpace;
 
 namespace MidSurfaceNameSpace.IO
 {
-    public interface IParser
+    public class FigureParser : IFigureParser
     {
-        Figure ImportFile(string filePath);
-    }
-
-    public class Parser : IParser
-    {
-        public Figure ImportFile(string filePath)
+        public IFigure ParseFile(string filePath)
         {
-            Shape2D deserialized = Parse(filePath);
+            Shape2D deserializedShape = Parse(filePath);
             
-            if (deserialized == null)
+            if (deserializedShape == null)
             {
                 return null;
             }
             //Temporary check here
-            foreach (var contour in deserialized.Contour)
+            foreach (var contour in deserializedShape.Contour)
             {
                 if (contour.JointsOfSegments.Count() != contour.Segments.Count())
                 {
@@ -37,8 +29,7 @@ namespace MidSurfaceNameSpace.IO
                 }
             }
 
-            Figure figure = Convert(deserialized);
-            return figure;
+            return ConvertShapeToFigure(deserializedShape);
         }
 
         public void ExportFile(IMidSurface f,  string filePath)
@@ -51,7 +42,7 @@ namespace MidSurfaceNameSpace.IO
 
         private Shape2D Parse(string filePath)
         {
-            if (!ValidateXML(filePath))
+            if (!ValidateXMLBySchema(filePath))
             {
                 return null;
             }
@@ -61,32 +52,10 @@ namespace MidSurfaceNameSpace.IO
             Shape2D shape = (Shape2D)serializer.Deserialize(fs);
             fs.Close();
 
-            //Can be used to invert path for model
-            //string path = Path.GetDirectoryName(filePath);
-            //string filename = Path.GetFileNameWithoutExtension(filePath);
-            //if (!filename.Contains("_new"))
-            //{
-            //    fs = new FileStream(path + @"\" + filename + "_new.xml", FileMode.CreateNew);
-
-            //    foreach (var contour in shape.Contour)
-            //    {
-            //        List<Point> tmp = contour.JointsOfSegments.ToList();
-            //        tmp.Reverse(1, tmp.Count - 1);
-            //        contour.JointsOfSegments = tmp.ToArray();
-            //        for (int i = 0; i < contour.Segments.Count(); i++)
-            //        {
-            //            contour.Segments[i] = contour.Segments[i].Reverse().ToArray();
-            //        }
-            //        contour.Segments = contour.Segments.Reverse().ToArray();
-            //    }
-
-            //    serializer.Serialize(fs, shape);
-            //    fs.Close();
-            //}
             return shape;
         }
 
-        private bool ValidateXML(string filePath)
+        private bool ValidateXMLBySchema(string filePath)
         {
             try
             {
@@ -130,7 +99,7 @@ namespace MidSurfaceNameSpace.IO
             }
         }
 
-        private Figure Convert(Shape2D shape)
+        private IFigure ConvertShapeToFigure(Shape2D shape)
         {
             Figure result = new Figure();
             foreach (var contour in shape.Contour)
